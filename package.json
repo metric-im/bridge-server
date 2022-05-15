@@ -1,15 +1,15 @@
 {
   "name": "@metric-im/bridge-server",
   "version": "1.0.0",
-  "description": "Bridge connections for metric",
+  "description": "External services integrated with metric messenger",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Sprague",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.17.2",
-    "node-fetch": "^2.6.7"
+    "axios": "^0.27.2",
+    "express": "^4.18.1"
   }
 }
