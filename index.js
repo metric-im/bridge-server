@@ -1,18 +1,18 @@
-let fs = require('fs');
-
-class Bridge {
+const fs = require('fs');
+class BridgeServer {
     constructor(connector) {
         this.connector = connector;
     }
     routes() {
         let router = require('express').Router();
-        let systems = fs.readdirSync(__dirname+'/systems');
         // set routes services
-        for (let name of systems) {
-            let comp = new (require(__dirname+'/systems/'+name))(this.connector);
-            router.use("/bridge/"+comp.name,comp.routes());
+        let modules = fs.readdirSync(__dirname+'/modules');
+        for (let module of modules) {
+            let name = module.replace(/(\.mjs|\.js)$/,"");
+            let comp = new (require('./modules/'+module))(this.connector)
+            router.use('/bridge/'+name.toLowerCase(),comp.routes());
         }
         return router;
     }
 }
-module.exports = Bridge;
+module.exports = BridgeServer
