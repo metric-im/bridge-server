@@ -24,6 +24,17 @@ export default class BridgeServer {
             // let comp = new (await import('./modules/'+module))(this.connector);
             router.use('/bridge/'+name,this.modules[name].routes());
         }
+        router.get('/bridgelist',(req,res)=>{
+            try {
+                res.json(this.list());
+            } catch(e) {
+                console.error(e);
+                res.send("unable to list")
+            }
+        })
         return router;
+    }
+    list() {
+        return Object.keys(this.modules);
     }
 }
