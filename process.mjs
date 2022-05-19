@@ -1,4 +1,4 @@
-let TokenTransactions = require('./processors/TokenTransactions');
+import TokenTransactions from './processors/TokenTransactions';
 
 const main = (async()=>{
     let process = new TokenTransactions();

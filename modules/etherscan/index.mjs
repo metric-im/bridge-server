@@ -1,11 +1,12 @@
-const axios = require('axios');
-class Etherscan {
+import axios from 'axios';
+import express from 'express';
+export default class Etherscan {
     constructor() {
         this.apikey = process.env.ETHERSCAN_KEY;
         this.root = "https://api.etherscan.io/api";
     }
     routes() {
-        let router = require('express').Router();
+        let router = express.Router();
         router.get('/', async (req,res)=>{
             try {
                 res.json(await this.get(req.url));
@@ -20,4 +21,3 @@ class Etherscan {
         return response.data.result;
     }
 }
-module.exports = Etherscan;
