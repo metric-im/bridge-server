@@ -1,8 +1,8 @@
-const Etherscan = require('../modules/etherscan');
-const axios = require("axios");
+import Etherscan from '../modules/etherscan/index.mjs';
+import axios from 'axios';
 const headers = {headers:{authorization:"bearer "+process.env.METRIC_KEY}};
 
-class TokenTransactions {
+export default class TokenTransactions {
     constructor() {
         this.etherscan = new Etherscan();
     }
@@ -60,5 +60,4 @@ class TokenTransactions {
         }
     }
 }
-module.exports = TokenTransactions;
 // RVT = 0x3d1ba9be9f66b8ee101911bc36d3fb562eac2244

@@ -1,4 +1,4 @@
-import TokenTransactions from './processors/TokenTransactions';
+import TokenTransactions from './processors/TokenTransactions.mjs';
 
 const main = (async()=>{
     let process = new TokenTransactions();
