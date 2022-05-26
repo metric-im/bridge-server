@@ -1,8 +1,8 @@
 import axios from 'axios';
 import express from 'express';
 export default class Etherscan {
-    constructor() {
-        this.apikey = process.env.ETHERSCAN_KEY;
+    constructor(connector) {
+        this.apikey = connector.profile.ETHERSCAN_KEY;
         this.root = "https://api.etherscan.io/api";
     }
     routes() {
