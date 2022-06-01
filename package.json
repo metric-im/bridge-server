@@ -9,6 +9,7 @@
   "author": "Michael Sprague",
   "license": "MIT",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.14",
     "axios": "^0.27.2",
     "express": "^4.18.1"
   }
