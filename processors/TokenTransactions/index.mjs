@@ -1,10 +1,10 @@
-import Etherscan from '../modules/etherscan/index.mjs';
 import axios from 'axios';
 const headers = {headers:{authorization:"bearer "+process.env.METRIC_KEY}};
 
 export default class TokenTransactions {
-    constructor() {
-        this.etherscan = new Etherscan();
+    constructor(bridge) {
+        this.bridge = bridge;
+        this.etherscan = this.bridge.modules.etherscan;
     }
     async traunch(token,block=0) {
         let data = await this.etherscan.get(`?module=account&action=tokentx&startblock=${block}&contractaddress=${token}`);

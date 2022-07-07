@@ -7,6 +7,7 @@ export default class BridgeServer {
     constructor(connector) {
         this.connector = connector;
         this.modules = {};
+        this.processors = {};
         this.root = path.dirname(fileURLToPath(import.meta.url));
     }
     static async mint(connector) {
@@ -15,6 +16,11 @@ export default class BridgeServer {
         for (let name of modules) {
             let module = await import(`${instance.root}/modules/${name}/index.mjs`);
             instance.modules[name.toLowerCase()] = new module.default(instance.connector);
+        }
+        let processors = fs.readdirSync(instance.root+"/processors");
+        for (let name of processors) {
+            let module = await import(`${instance.root}/processors/${name}/index.mjs`);
+            instance.processors[name.toLowerCase()] = new module.default(instance);
         }
         return instance;
     }
@@ -36,5 +42,10 @@ export default class BridgeServer {
     }
     list() {
         return Object.keys(this.modules);
+    }
+    async process() {
+        let args = Array.from(arguments);
+        let name = args.shift();
+        return await this.processors[name].run(...args)
     }
 }

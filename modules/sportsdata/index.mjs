@@ -31,7 +31,12 @@ export default class Sportsdata {
         let key = this.creds.base[league];
         if (dataset === 'projections') key = this.creds.projections[league];
         if (dataset === 'odds') key = this.creds.odds[league];
-        const response = await axios.get(`${this.root}${url}`,{headers:{'Ocp-Apim-Subscription-Key':key}});
-        return response.data;
+        try {
+            let response = await axios.get(`${this.root}${url}`,{headers:{'Ocp-Apim-Subscription-Key':key}});
+            return response.data;
+        } catch(e) {
+            console.log(e);
+            return e;
+        }
     }
 }
