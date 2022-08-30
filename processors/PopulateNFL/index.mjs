@@ -32,7 +32,7 @@ export default class PopulateNFL {
     async run() {
         try {
             console.log("started "+new Date());
-            let games = await this.games("2021REG");
+            let games = await this.games("2022PRE");
             let books = await this.sportsBooks();
             for (let game of games) {
                 let outcomes = []
@@ -60,7 +60,8 @@ export default class PopulateNFL {
                 }
                 // game._markets = await this.bettingMarkets(game.ScoreID);
                 console.log(`${record.Season}-${record.Week} ${record.GameName}`);
-                await axios.put(this.endpoint,outcomes,this.headers);
+                if (outcomes.length === 0) console.log('no games');
+                else await axios.put(this.endpoint,outcomes,this.headers);
             }
             return "done "+new Date();
         } catch(e) {
