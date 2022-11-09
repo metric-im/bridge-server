@@ -32,7 +32,7 @@ export default class PopulateNFL {
     async run() {
         try {
             console.log("started "+new Date());
-            let games = await this.games("2022PRE");
+            let games = await this.games("2022");
             let books = await this.sportsBooks();
             for (let game of games) {
                 let outcomes = []

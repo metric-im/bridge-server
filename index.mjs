@@ -1,25 +1,24 @@
 import fs from 'fs';
 import express from 'express';
-import path from "path";
-import { fileURLToPath } from 'url';
+import Componentry from "@metric-im/componentry";
 
-export default class BridgeServer {
+export default class BridgeServer extends Componentry.Module {
     constructor(connector) {
+        super(connector,import.meta.url);
         this.connector = connector;
         this.modules = {};
         this.processors = {};
-        this.root = path.dirname(fileURLToPath(import.meta.url));
     }
     static async mint(connector) {
         let instance = new BridgeServer(connector);
-        let modules = fs.readdirSync(instance.root+"/modules");
+        let modules = fs.readdirSync(instance.rootPath+"/modules");
         for (let name of modules) {
-            let module = await import(`${instance.root}/modules/${name}/index.mjs`);
+            let module = await import(`${instance.rootPath}/modules/${name}/index.mjs`);
             instance.modules[name.toLowerCase()] = new module.default(instance.connector);
         }
-        let processors = fs.readdirSync(instance.root+"/processors");
+        let processors = fs.readdirSync(instance.rootPath+"/processors");
         for (let name of processors) {
-            let module = await import(`${instance.root}/processors/${name}/index.mjs`);
+            let module = await import(`${instance.rootPath}/processors/${name}/index.mjs`);
             instance.processors[name.toLowerCase()] = new module.default(instance);
         }
         return instance;
