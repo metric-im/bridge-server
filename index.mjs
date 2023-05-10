@@ -1,10 +1,12 @@
 import fs from 'fs';
 import express from 'express';
+import Componentry from "@metric-im/componentry";
 import path from "path";
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from "url";
 
-export default class BridgeServer {
+export default class BridgeServer extends Componentry.Module {
     constructor(connector) {
+        super(connector,import.meta.url);
         this.connector = connector;
         this.modules = {};
         this.processors = {};

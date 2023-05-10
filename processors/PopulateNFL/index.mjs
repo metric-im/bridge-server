@@ -33,7 +33,7 @@ export default class PopulateNFL {
         try {
             console.log("started "+new Date());
             let games = await this.games("2022");
-            // let books = await this.sportsBooks();
+            let books = await this.sportsBooks();
             for (let game of games) {
                 let outcomes = []
                 if (!game.IsOver) continue;
