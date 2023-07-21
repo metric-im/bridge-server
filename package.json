@@ -1,6 +1,6 @@
 {
   "name": "@metric-im/bridge-server",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "External services integrated with metric messenger",
   "main": "index.mjs",
   "type": "module",
