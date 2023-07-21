@@ -19,11 +19,11 @@ export default class BridgeServer extends Componentry.Module {
             let module = await import(`${instance.rootPath}/modules/${name}/index.mjs`);
             instance.modules[name.toLowerCase()] = new module.default(instance.connector);
         }
-        let processors = fs.readdirSync(instance.rootPath+"/processors");
-        for (let name of processors) {
-            let module = await import(`${instance.rootPath}/processors/${name}/index.mjs`);
-            instance.processors[name.toLowerCase()] = new module.default(instance);
-        }
+        // let processors = fs.readdirSync(instance.rootPath+"/processors");
+        // for (let name of processors) {
+        //     let module = await import(`${instance.rootPath}/processors/${name}/index.mjs`);
+        //     instance.processors[name.toLowerCase()] = new module.default(instance);
+        // }
         return instance;
     }
     routes() {
